@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1069</width>
+    <height>684</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Crypto Trader</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Strategy test</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="GraphicsWindow" name="candles_graph"/>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="1" column="2">
+             <widget class="QScrollBar" name="slider_end">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QScrollBar" name="slider_begin">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>70</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>End:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="maximumSize">
+               <size>
+                <width>40</width>
+                <height>70</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Begin:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDateTimeEdit" name="range_begin_dt">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>140</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="currentSection">
+               <enum>QDateTimeEdit::DaySection</enum>
+              </property>
+              <property name="displayFormat">
+               <string>dd/M/yy HH:mm</string>
+              </property>
+              <property name="timeSpec">
+               <enum>Qt::UTC</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDateTimeEdit" name="range_end_dt">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>140</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="currentSection">
+               <enum>QDateTimeEdit::DaySection</enum>
+              </property>
+              <property name="displayFormat">
+               <string>dd/M/yy HH:mm</string>
+              </property>
+              <property name="timeSpec">
+               <enum>Qt::UTC</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="GraphicsWindow" name="BTC_graph"/>
+            </item>
+            <item>
+             <widget class="GraphicsWindow" name="USD_graph"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="1">
+           <widget class="QComboBox" name="pair_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="last_buy_price_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="17" column="0">
+           <widget class="QPushButton" name="clear_main_plot_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
+          </item>
+          <item row="15" column="0" colspan="2">
+           <widget class="QPushButton" name="show_real_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Show real</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Wallet parts:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Pair:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Timeframe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="14" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Trades (start date):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Timeperiod:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0" colspan="2">
+           <widget class="QPushButton" name="ts_analysis_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Statistical analysis</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QSpinBox" name="wallet_parts_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="value">
+             <number>3</number>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="last_sell_price_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QLineEdit" name="wallet_BTC_init_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>0.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="14" column="1">
+           <widget class="QComboBox" name="existing_real_trades">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="wallet_USD_init_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>200.0</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0" colspan="2">
+           <widget class="QPushButton" name="test_strategy_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Test strategy</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="timeperiod_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="value">
+             <number>9</number>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_8">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Last SELL price:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_9">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>BTC wallet balance:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="17" column="1">
+           <widget class="QPushButton" name="investigate_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Auto test</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="0">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>USD wallet balance:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="timeframe_test">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>150</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QPushButton" name="fetch_data_button">
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Update init data</string>
+            </property>
+           </widget>
+          </item>
+          <item row="16" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="13" column="0" colspan="2">
+           <widget class="QPushButton" name="get_existing_real_trades_button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>250</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Fetch real trades data</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Last BUY price:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Strategy test - settings</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_info">
+            <property name="text">
+             <string>INFO PIC</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="forse_commit_sell_buy_status_distace_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>#60*24*2</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="EP_gradient_threshold_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="label_17">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Force Order Interval (FOI). 
+Force commit 'sell&lt;-&gt;buy' order distace (minutes): 
+(# - Ignore)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="LPP_count_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="buy_threshold_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>1.5</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="sell_threshold_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>1.5</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="2">
+             <widget class="QCheckBox" name="independent_last_sell_buy_price_checking_test">
+              <property name="text">
+               <string>Independent last sell/buy price checking</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="LPP_gradients_threshold_test">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>(MSP) Min BUY profit per order besides fee (%):</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_13">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>EP gradient threshold:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_12">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Count of LPP:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>LPP gradients threshold:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0" colspan="2">
+             <widget class="QCheckBox" name="draw_candles">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Draw candles</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_16">
+              <property name="maximumSize">
+               <size>
+                <width>300</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>(MBP) Min SELL profit per order besides fee (%):</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Backend - Trader</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QTextEdit" name="trader_log"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_9">
+              <item row="2" column="2">
+               <widget class="QPushButton" name="trader_status_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Full log</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_20">
+                <property name="text">
+                 <string>Trader:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="trader_start_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPushButton" name="trader_stop_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="pair_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="fetch_available_balance_button">
+                <property name="text">
+                 <string>Get Balance</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="trader_status_short_button">
+                <property name="text">
+                 <string>Summary</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_5">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <item row="11" column="1">
+               <widget class="QLineEdit" name="forse_commit_sell_buy_status_distace_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>#60*24*2</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="label_30">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>(MSP) Min SELL profit per order besides fee (%):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="label_28">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>(MSP) Min BUY profit per order besides fee (%):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_25">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Last SELL price:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="1">
+               <widget class="QLineEdit" name="sell_threshold_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>1.5</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="0">
+               <widget class="QLabel" name="label_31">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Force Order Interval (FOI). 
+Force commit 'sell&lt;-&gt;buy' order distace (minutes): 
+(# - Ignore)</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_29">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>LPP gradients threshold:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLineEdit" name="LPP_gradients_threshold_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="timeperiod_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>9</string>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="0" colspan="2">
+               <widget class="QCheckBox" name="independent_last_sell_buy_price_checking_trader">
+                <property name="text">
+                 <string>Independent last sell/buy price checking</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_24">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Last BUY price:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="LPP_count_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLineEdit" name="buy_threshold_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>1.5</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="last_sell_price_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>inherit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_26">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Count of LPP:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_22">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Timeperiod:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="last_buy_price_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>inherit</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="EP_gradient_threshold_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_23">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Wallet parts:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="label_21">
+                <property name="text">
+                 <string>Trader settings (for start):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="wallet_parts_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>70</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>2</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="label_27">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>EP gradient threshold:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="timeframe_trader">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_18">
+                <property name="text">
+                 <string>Timeframe:</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Backend - Collector</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QTextEdit" name="collector_log"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_11">
+              <item row="1" column="1">
+               <widget class="QPushButton" name="collector_stop_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="collector_pair_timeframe">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>XMRUSD::1m</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_32">
+                <property name="text">
+                 <string>Pair:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QPushButton" name="pair_remove_from_collect_button">
+                <property name="text">
+                 <string>Remove from collect</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QPushButton" name="candles_clear_button">
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_33">
+                <property name="text">
+                 <string>Candles:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QPushButton" name="candles_clear_all_button">
+                <property name="text">
+                 <string>Clear ALL</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QPushButton" name="pair_add_to_collect_button">
+                <property name="text">
+                 <string>Add to collect</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="2">
+               <widget class="QPushButton" name="pair_get_all_button">
+                <property name="text">
+                 <string>Get ALL</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_19">
+                <property name="text">
+                 <string>Collector:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="collector_start_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="collector_status_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Status</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="2">
+               <widget class="QPushButton" name="candles_info_button">
+                <property name="text">
+                 <string>Info</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="3">
+               <widget class="QTreeWidget" name="trades_history_tree">
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::MultiSelection</enum>
+                </property>
+                <property name="horizontalScrollMode">
+                 <enum>QAbstractItemView::ScrollPerItem</enum>
+                </property>
+                <property name="columnCount">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_34">
+                <property name="text">
+                 <string>Trades history:</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1069</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GraphicsWindow</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
