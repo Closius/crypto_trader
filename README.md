@@ -63,11 +63,19 @@ requests
 matplotlib
 statsmodels
 PyQt5 (I use 5.10)
-pyqtgraph
 numpy
 ```
 
-Install [TA-lib](https://github.com/mrjbq7/ta-lib)
+Install PyQtGraph
+
+```
+pip install pyqtgraph
+```
+
+Install [TA-lib](https://github.com/mrjbq7/ta-lib#dependencies).
+For Windows you can try [unofficial windows binaries for both 32-bit and 64-bit](https://www.lfd.uci.edu/~gohlke/pythonlibs/#ta-lib)
+
+
 Set ``SERVER_ENDPOINT`` in ``secret_settings.py``
 
 ## Get started:

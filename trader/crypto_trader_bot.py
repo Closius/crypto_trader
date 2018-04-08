@@ -527,8 +527,7 @@ def main(trader_parms):
                                                               # TODO: If not None it is a Decimal
                     forse_commit_sell_buy_status_distace    = trade.forse_commit_sell_buy_status_distace,
                     pair                                    = trade.pair_timeframe.pair,
-                    trade_id                                = trade.id,
-                    logger=logger
+                    trade_id                                = trade.id
     )
 
     log_info("")
