@@ -14,6 +14,8 @@ Current implementation developed for cryptocurrency trading on
 the cryptocurrency stock exchange [Bitfinex](https://www.bitfinex.com).
 You have to have account and [API Access](https://docs.bitfinex.com/docs/api-access).
 
+Full overview might be found [here](https://github.com/Closius/crypto_trader/blob/master/trader/misc/cypto_trader.pages)
+
 ## Get started:
 
 1. Install server and frontend. Then all interactions will go through frontend GUI.
