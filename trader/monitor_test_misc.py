@@ -173,7 +173,7 @@ def crypto_trader_bot(action, trader_start_conditions=None):
         data.update(trader_start_conditions)
     data = json.dumps(data)
     r = requests.post(ENDPOINT + "crypto_trader_bot/", data=data)
-    if action == "status":
+    if (action == "status") or (action == "short_status"):
         return r.json()
     r = dict_json_str(r.json())
     return r
@@ -499,6 +499,7 @@ class Ui_Form(Ui_MainWindow):
 
         self.pair_trader.currentIndexChanged.connect(self.pair_changed)
         self.trader_status_button.clicked.connect(self.trader_status)
+        self.trader_status_short_button.clicked.connect(self.trader_status_short)
 
         self.trader_start_button.clicked.connect(self.trader_start)
 
@@ -522,9 +523,6 @@ class Ui_Form(Ui_MainWindow):
         self.pair_remove_from_collect_button.clicked.connect(self.pair_remove_from_collect)
 
 
-        self.pair_get_all_button.clicked.connect(self.pair_get_all)
-
-        self.candles_clear_button.clicked.connect(self.candles_clear_DB)
 
         self.candles_clear_all_button.clicked.connect(self.candles_clear_DB_ALL)
 
@@ -696,17 +694,6 @@ class Ui_Form(Ui_MainWindow):
         self.collector_log.append(kek)
         self.update_pairs_timeframes()
 
-    def pair_get_all(self, event=None):
-        r = pair(action="get_all")
-        r = dict_json_str(r)
-        r = "Pairs in Database: \n\n" + r
-        self.collector_log.clear()
-        self.collector_log.append(r)
-
-    def candles_clear_DB(self):
-        self.collector_log.setText("candles_clear_DB. Not yet implemented...")
-        pass
-
     def candles_clear_DB_ALL(self):
         r1 = collector(action="stop")
         kek = "Collector has been stopped.\n\n"
@@ -736,6 +723,20 @@ class Ui_Form(Ui_MainWindow):
         }
         r = crypto_trader_bot(action="status", trader_start_conditions=trader_start_conditions)
         kek = "Crypto Trader Bot STATUS: \n\n"
+        # kek += "Out file: \n" + r["out_file"]
+        kek += "\n\nLog file: \n" + r["log_file"]
+        kek += "\n\nStatus: " + str(r["is_alive"])
+
+        self.trader_log.clear()
+        self.trader_log.append(kek)
+
+    def trader_status_short(self, event=None):
+        pair = self.pair_trader.currentText()
+        trader_start_conditions = {
+            "pair": pair
+        }
+        r = crypto_trader_bot(action="short_status", trader_start_conditions=trader_start_conditions)
+        kek = "Crypto Trader Bot short STATUS(last 228 lines): \n\n"
         # kek += "Out file: \n" + r["out_file"]
         kek += "\n\nLog file: \n" + r["log_file"]
         kek += "\n\nStatus: " + str(r["is_alive"])

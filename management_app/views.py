@@ -48,6 +48,13 @@ def run_command_in_virtualenv(command):
     process = Popen(commands, stdout=PIPE, shell=True)
     return process.communicate()
 
+def file_read_last_lines(fname, lines):
+    s = ""
+    with open(fname) as f:
+        x = f.readlines()
+        s += ''.join(x[-lines:])
+    return s
+
 
 def collector(request):
     """
@@ -85,7 +92,7 @@ def collector(request):
     received_json_data = json.loads(request.body.decode())
 
     work_dir, log_dir, misc_dir = settings()
-    log_file = os.path.join(log_dir, "collect_data.out")
+    log_file = os.path.join(log_dir, "collect_data.log")
     pid_file = os.path.join(log_dir, "collect_data.pid")
     collector_py = os.path.join(work_dir, "collect_data.py")
 
@@ -104,7 +111,7 @@ def collector(request):
             os.remove(log_file)
 
         if received_json_data["action"] == "start":
-            command = "nohup python3 " + collector_py + " > " + log_file + " & echo $! >> " + pid_file
+            command = "nohup python3 " + collector_py + " > /dev/null & echo $! >> " + pid_file
             run_command_in_virtualenv(command)
 
     if received_json_data["action"] == "status":
@@ -143,7 +150,7 @@ def crypto_trader_bot(request):
     .. sourcecode:: json
 
         {
-          "action": "status", # "stop"
+          "action": "status", # "stop", "short_status"
           "pair": "XMRUSD"
         }
 
@@ -182,7 +189,6 @@ def crypto_trader_bot(request):
     received_json_data = json.loads(request.body.decode())
 
     work_dir, log_dir, misc_dir = settings()
-    out_file = "/dev/null" #os.path.join(log_dir, "trader_%s.out" % received_json_data["pair"])
     log_file = os.path.join(log_dir, "crypto_trader_bot_%s.log" % received_json_data["pair"])
     pid_file = os.path.join(log_dir, "trader_%s.pid" % received_json_data["pair"])
     trader_py = os.path.join(work_dir, "crypto_trader_bot.py")
@@ -219,7 +225,7 @@ def crypto_trader_bot(request):
                   " " + str(received_json_data["DIV_PARTS"]) + \
                   " " + str(received_json_data["init_last_sell_price"]) + \
                   " " + str(received_json_data["init_last_buy_price"]) + \
-                      " > " + out_file + " & echo $! >> " + pid_file
+                      " > /dev/null & echo $! >> " + pid_file
             run_command_in_virtualenv(command)
 
     if received_json_data["action"] == "status":
@@ -239,6 +245,33 @@ def crypto_trader_bot(request):
         if os.path.exists(log_file):
             with open(log_file) as f:
                 log_file_text = f.read()
+        else:
+            log_file_text = "No log file"
+
+        data = {
+            "is_alive": pid_is_alive,
+            # "out_file": str(out_file_text),
+            "log_file": str(log_file_text)
+        }
+
+        return json_response(data)
+
+    if received_json_data["action"] == "short_status":
+        if os.path.exists(pid_file):
+            with open(pid_file) as f:
+                pids = f.read()
+            pid_is_alive = check_pid(int(pids))
+        else:
+            pid_is_alive = False
+
+        # if os.path.exists(out_file):
+        #     with open(out_file) as f:
+        #         out_file_text = f.read()
+        # else:
+        #     out_file_text = "No out file"
+
+        if os.path.exists(log_file):
+            log_file_text = file_read_last_lines(log_file, 228)
         else:
             log_file_text = "No log file"
 

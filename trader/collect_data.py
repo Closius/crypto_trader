@@ -3,6 +3,7 @@ import sys
 import datetime
 import time
 import traceback
+import logging
 
 from btfxwss import BtfxWss
 from django.db import connection
@@ -13,22 +14,9 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["DJANGO_SETTINGS_MODULE"] = "server.settings"
 django.setup()
 
-from management_app.models import Pair_Timeframe, Candle
+from management_app.models import Pair_Timeframe
+from server.settings import BASE_DIR
 
-import logging
-logger = logging.getLogger('collector')
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-logger.addHandler(ch)
-# from server.settings import BASE_DIR
-# log_file = os.path.join(BASE_DIR, "logs", "log", "collector.log")
-# fh = logging.FileHandler(log_file)
-# fh.setLevel(logging.DEBUG)
-# fh.setFormatter(formatter)
-# logger.addHandler(fh)
 
 def upsert(data, pairs_timeframes_id):
     """
@@ -68,7 +56,7 @@ def should_update(current_mts, last_mts, pairs_timeframes_id):
         last_mts[pairs_timeframes_id] = current_mts
         return True
 
-def main():
+def main(logger):
 
     # Fetch available pairs & timeframes from DB
     pairs_timeframes = Pair_Timeframe.objects.all()
@@ -157,7 +145,21 @@ def main():
     logger.info("Process terminated")
 
 if __name__ == '__main__':
+    logger = logging.getLogger('collector')
+    logger.setLevel(logging.DEBUG)
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+
+    log_file = os.path.join(BASE_DIR, "logs", "log", "collect_data.log")
+    fh = logging.FileHandler(log_file)
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
+
     try:
-        main()
+        main(logger)
     except Exception:
         logger.error(str(traceback.format_exc()))

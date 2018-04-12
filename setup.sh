@@ -173,3 +173,17 @@ echo "server {
 ln -s /etc/nginx/sites-available/crypto_trader /etc/nginx/sites-enabled/crypto_trader
 rm /etc/nginx/sites-enabled/default
 systemctl restart nginx
+#
+echo "========================================================="
+echo ""
+echo "                  Systemd status"
+echo ""
+echo "========================================================="
+echo ""
+# list all enabled systemd services
+systemctl list-unit-files | grep enabled will list all enabled ones.
+#
+# lils currently running systemd services
+systemctl | grep running
+# sudo systemctl restart gunicorn_crypto_trader
+# sudo systemctl restart nginx

@@ -764,7 +764,11 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QTextEdit" name="trader_log"/>
+             <widget class="QTextEdit" name="trader_log">
+              <property name="lineWrapMode">
+               <enum>QTextEdit::NoWrap</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -772,49 +776,10 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <layout class="QGridLayout" name="gridLayout_9">
-              <item row="2" column="2">
-               <widget class="QPushButton" name="trader_status_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Full log</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_20">
                 <property name="text">
                  <string>Trader:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QPushButton" name="trader_start_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Start</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPushButton" name="trader_stop_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Stop</string>
                 </property>
                </widget>
               </item>
@@ -835,10 +800,49 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
+              <item row="3" column="2">
+               <widget class="QPushButton" name="trader_start_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
                <widget class="QPushButton" name="trader_status_short_button">
                 <property name="text">
-                 <string>Summary</string>
+                 <string>Short log</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="trader_status_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Full log</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="trader_stop_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
                 </property>
                </widget>
               </item>
@@ -1170,7 +1174,11 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
-             <widget class="QTextEdit" name="collector_log"/>
+             <widget class="QTextEdit" name="collector_log">
+              <property name="lineWrapMode">
+               <enum>QTextEdit::NoWrap</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -1178,19 +1186,6 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <layout class="QGridLayout" name="gridLayout_11">
-              <item row="1" column="1">
-               <widget class="QPushButton" name="collector_stop_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Stop</string>
-                </property>
-               </widget>
-              </item>
               <item row="4" column="1">
                <widget class="QLineEdit" name="collector_pair_timeframe">
                 <property name="maximumSize">
@@ -1246,43 +1241,10 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
                 </property>
                </widget>
               </item>
-              <item row="5" column="2">
-               <widget class="QPushButton" name="pair_get_all_button">
-                <property name="text">
-                 <string>Get ALL</string>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="0">
                <widget class="QLabel" name="label_19">
                 <property name="text">
                  <string>Collector:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QPushButton" name="collector_start_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Start</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QPushButton" name="collector_status_button">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Status</string>
                 </property>
                </widget>
               </item>
@@ -1295,6 +1257,12 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
               </item>
               <item row="3" column="0" colspan="3">
                <widget class="QTreeWidget" name="trades_history_tree">
+                <property name="minimumSize">
+                 <size>
+                  <width>600</width>
+                  <height>0</height>
+                 </size>
+                </property>
                 <property name="alternatingRowColors">
                  <bool>true</bool>
                 </property>
@@ -1313,6 +1281,45 @@ Force commit 'sell&lt;-&gt;buy' order distace (minutes):
                <widget class="QLabel" name="label_34">
                 <property name="text">
                  <string>Trades history:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QPushButton" name="collector_stop_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Stop</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="collector_start_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Start</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="collector_status_button">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Status</string>
                 </property>
                </widget>
               </item>
