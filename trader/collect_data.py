@@ -157,4 +157,7 @@ def main():
     logger.info("Process terminated")
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception:
+        logger.error(str(traceback.format_exc()))
