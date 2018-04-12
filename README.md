@@ -102,4 +102,18 @@ pip install TA_lib.whl
 
 Set ``SERVER_ENDPOINT`` in ``secret_settings.py``. Note: Do not edit other variables in ``secret_settings.py`` on frontend.
 
+## Update server
 
+First stop trader and collector from frontend
+
+Then go to your server and:
+```
+ssh root@111.222.333.444 -p 22
+cd ~/crypto_trader
+git pull origin master
+```
+Check your values in ``server/secret_settings.py``
+```
+sudo systemctl restart gunicorn_crypto_trader
+sudo systemctl restart nginx
+```
