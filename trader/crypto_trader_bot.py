@@ -12,6 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["DJANGO_SETTINGS_MODULE"] = "server.settings"
 django.setup()
 from management_app.models import Pair_Timeframe, Candle, Trade, Orders_History
+from management_app.views import collector_misc
 
 from trader import bitfinex_client
 from trader.strategy import Strategy
@@ -29,6 +30,25 @@ from server.settings import BASE_DIR
 
 def log_info(msg):
     logger.info(msg)
+
+def check_collecor_is_running(last_date):
+
+    if not hasattr(check_collecor_is_running, "previous_last_date"):
+        setattr(check_collecor_is_running, "previous_last_date", last_date)
+        return
+    if check_collecor_is_running.previous_last_date == last_date:
+        should_restart = True
+        while should_restart:
+            # Restart
+            collector_misc("stop")
+            time.sleep(2)
+            collector_misc("start")
+            time.sleep(10)
+            d = collector_misc("status")  # TODO: might be not good
+            if d["is_alive"] == True:
+                should_restart = False
+    else:
+        return
 
 def get_balance(currency, low_limit):
     available = 0.0
@@ -540,49 +560,55 @@ def main(trader_parms):
 
     i = 0 
     wait_datetime = datetime.datetime.utcnow() - datetime.timedelta(seconds=60)
+    wait_datetime_check_collector = datetime.datetime.utcnow()
     try:
         while True:
 
-                time.sleep(5)
-                i += 1
-                log_info("Check: " + str(i))
+            time.sleep(5)
+            i += 1
+            log_info("Check: " + str(i))
 
-                # Get fees
-                if (datetime.datetime.utcnow() - wait_datetime) >= datetime.timedelta(seconds=60):
-                    wait_datetime = datetime.datetime.utcnow()
-                    fees = bitfinex_client.post_account_info(show_console=False)
-                    for fee in fees[0]["fees"]:
-                        # TODO: Only 3 simbols TIKERS !!!!!!
-                        if fee["pairs"] == pair[:3]:
-                            maker_fee = fee["maker_fees"]
-                            taker_fee = fee["taker_fees"]
+            # Get fees
+            if (datetime.datetime.utcnow() - wait_datetime) >= datetime.timedelta(seconds=60):
+                wait_datetime = datetime.datetime.utcnow()
+                fees = bitfinex_client.post_account_info(show_console=False)
+                for fee in fees[0]["fees"]:
+                    # TODO: Only 3 simbols TIKERS !!!!!!
+                    if fee["pairs"] == pair[:3]:
+                        maker_fee = fee["maker_fees"]
+                        taker_fee = fee["taker_fees"]
 
 
-                begin_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=60*24*2)
+            begin_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=60*24*2)
 
-                date, openp, closep, highp, lowp, volumep = get_candles_data(pair_timeframe, begin_time)
+            date, openp, closep, highp, lowp, volumep = get_candles_data(pair_timeframe, begin_time)
 
-                # Get current price
-                if trade.pair_timeframe.timeframe != "1m":
-                    candles = Candle.objects.filter(pair_timeframe=pair_timeframe).latest('mts')
-                    date_1m = candles.mts
-                    closep_1m = candles.close
-                else:
-                    date_1m = date
-                    closep_1m = closep
+            # Get current price
+            if trade.pair_timeframe.timeframe != "1m":
+                candles = Candle.objects.filter(pair_timeframe=pair_timeframe).latest('mts')
+                date_1m = candles.mts
+                closep_1m = candles.close
+            else:
+                date_1m = date
+                closep_1m = closep
 
-                if len(date_1m) == 0:
-                    continue
-                current_best_ask = closep_1m[-1]
-                current_best_bid = closep_1m[-1]
+            if len(date_1m) == 0:
+                continue
+            current_best_ask = closep_1m[-1]
+            current_best_bid = closep_1m[-1]
 
-                candle_price = highp + (highp - lowp)/2
-                strategy.calculate(last_N_candle_prices=candle_price, 
-                    las_N_current_date=date,
-                    current_best_ask=current_best_ask, 
-                    current_best_bid=current_best_bid,
-                    maker_fee = maker_fee,
-                    taker_fee = taker_fee)
+            candle_price = highp + (highp - lowp)/2
+            strategy.calculate(last_N_candle_prices=candle_price,
+                las_N_current_date=date,
+                current_best_ask=current_best_ask,
+                current_best_bid=current_best_bid,
+                maker_fee = maker_fee,
+                taker_fee = taker_fee)
+
+            if (datetime.datetime.utcnow() - wait_datetime_check_collector) >= datetime.timedelta(minutes=10):
+                wait_datetime_check_collector = datetime.datetime.utcnow()
+                check_collecor_is_running(last_date = date[-1])
+
 
     except Exception:
         logger.error(str(traceback.format_exc()))

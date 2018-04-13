@@ -55,6 +55,53 @@ def file_read_last_lines(fname, lines):
         s += ''.join(x[-lines:])
     return s
 
+def collector_misc(action):
+    work_dir, log_dir, misc_dir = settings()
+    log_file = os.path.join(log_dir, "collect_data.log")
+    pid_file = os.path.join(log_dir, "collect_data.pid")
+    collector_py = os.path.join(work_dir, "collect_data.py")
+
+
+    if (action == "start") or (action == "stop"):
+        # Clear
+        if os.path.exists(pid_file):
+            with open(pid_file) as f:
+                pids = f.read()
+            try:
+                os.kill(int(pids), signal.SIGTERM) #or signal.SIGKILL
+            except ProcessLookupError:
+                pass
+            os.remove(pid_file)
+        if os.path.exists(log_file):
+            os.remove(log_file)
+
+        if action == "start":
+            command = "nohup python3 " + collector_py + " > /dev/null & echo $! >> " + pid_file
+            run_command_in_virtualenv(command)
+
+        return dict()
+
+    if action == "status":
+        if os.path.exists(pid_file):
+            with open(pid_file) as f:
+                pids = f.read()
+            pid_is_alive = check_pid(int(pids))
+        else:
+            pid_is_alive = False
+
+        if os.path.exists(log_file):
+            with open(log_file) as f:
+                log_text = f.read()
+        else:
+            log_text = "No log file"
+
+        data = {
+            "is_alive": pid_is_alive,
+            "log": str(log_text)
+        }
+
+        return data
+
 
 def collector(request):
     """
@@ -90,52 +137,8 @@ def collector(request):
 
     """
     received_json_data = json.loads(request.body.decode())
-
-    work_dir, log_dir, misc_dir = settings()
-    log_file = os.path.join(log_dir, "collect_data.log")
-    pid_file = os.path.join(log_dir, "collect_data.pid")
-    collector_py = os.path.join(work_dir, "collect_data.py")
-
-
-    if (received_json_data["action"] == "start") or (received_json_data["action"] == "stop"):
-        # Clear
-        if os.path.exists(pid_file):
-            with open(pid_file) as f:
-                pids = f.read()
-            try:
-                os.kill(int(pids), signal.SIGTERM) #or signal.SIGKILL
-            except ProcessLookupError:
-                pass
-            os.remove(pid_file)
-        if os.path.exists(log_file):
-            os.remove(log_file)
-
-        if received_json_data["action"] == "start":
-            command = "nohup python3 " + collector_py + " > /dev/null & echo $! >> " + pid_file
-            run_command_in_virtualenv(command)
-
-    if received_json_data["action"] == "status":
-        if os.path.exists(pid_file):
-            with open(pid_file) as f:
-                pids = f.read()
-            pid_is_alive = check_pid(int(pids))
-        else:
-            pid_is_alive = False
-
-        if os.path.exists(log_file):
-            with open(log_file) as f:
-                log_text = f.read()
-        else:
-            log_text = "No log file"
-
-        data = {
-            "is_alive": pid_is_alive,
-            "log": str(log_text)
-        }
-
-        return json_response(data)
-
-    return json_response(dict())
+    r = collector_misc(action=received_json_data["action"])
+    return json_response(r)
 
 def crypto_trader_bot(request):
     """

@@ -17,7 +17,6 @@ django.setup()
 from management_app.models import Pair_Timeframe
 from server.settings import BASE_DIR
 
-
 def upsert(data, pairs_timeframes_id):
     """
         ON CONFLICT affects field which has some constraint like unique. Otherwise it raises an error
@@ -158,6 +157,8 @@ if __name__ == '__main__':
     fh.setLevel(logging.DEBUG)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
+
+    logger.info("Started")
 
     try:
         main(logger)
