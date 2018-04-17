@@ -3,6 +3,7 @@ import os
 import traceback
 import time
 import datetime
+import math
 
 import numpy as np
 
@@ -31,12 +32,26 @@ from server.settings import BASE_DIR
 def log_info(msg):
     logger.info(msg)
 
-def check_collecor_is_running(last_date):
+def check_collecor_is_running(date, timeframe):
 
-    if not hasattr(check_collecor_is_running, "previous_last_date"):
-        setattr(check_collecor_is_running, "previous_last_date", last_date)
+    if not hasattr(check_collecor_is_running, "wait_delay"):
+        setattr(check_collecor_is_running, "wait_delay", datetime.datetime.utcnow())
+        setattr(check_collecor_is_running, "previous_last_date", date[-1])
+        if "m" in timeframe:
+            wait_period = int(timeframe[:-1])
+        elif "h" in timeframe:
+            wait_period = int(timeframe[:-1]) * 60
+        elif "d" in timeframe:
+            wait_period = int(timeframe[:-1]) * 60 * 24
+        p = math.ceil(wait_period * 1.35)
+        p = 3 if p < 15 else p
+        setattr(check_collecor_is_running, "wait_period", p)
         return
-    if check_collecor_is_running.previous_last_date == last_date:
+
+    if (datetime.datetime.utcnow() - check_collecor_is_running.wait_delay) < datetime.timedelta(minutes=check_collecor_is_running.wait_period):
+        return
+
+    if check_collecor_is_running.previous_last_date == date[-1]:
         should_restart = True
         while should_restart:
             # Restart
@@ -47,8 +62,22 @@ def check_collecor_is_running(last_date):
             d = collector_misc("status")  # TODO: might be not good
             if d["is_alive"] == True:
                 should_restart = False
-    else:
-        return
+        log_info("====================================================================")
+        log_info("====================================================================")
+        log_info("====================================================================")
+        log_info("")
+        log_info("")
+        log_info("")
+        log_info("                     Collector has been restarted")
+        log_info("")
+        log_info("")
+        log_info("")
+        log_info("====================================================================")
+        log_info("====================================================================")
+        log_info("====================================================================")
+    check_collecor_is_running.wait_delay = datetime.datetime.utcnow()
+    check_collecor_is_running.previous_last_date = date[-1]
+    return
 
 def get_balance(currency, low_limit):
     available = 0.0
@@ -560,7 +589,6 @@ def main(trader_parms):
 
     i = 0 
     wait_datetime = datetime.datetime.utcnow() - datetime.timedelta(seconds=60)
-    wait_datetime_check_collector = datetime.datetime.utcnow()
     try:
         while True:
 
@@ -605,9 +633,8 @@ def main(trader_parms):
                 maker_fee = maker_fee,
                 taker_fee = taker_fee)
 
-            if (datetime.datetime.utcnow() - wait_datetime_check_collector) >= datetime.timedelta(minutes=10):
-                wait_datetime_check_collector = datetime.datetime.utcnow()
-                check_collecor_is_running(last_date = date[-1])
+
+            check_collecor_is_running(date=date, timeframe=trader_parms["timeframe"])
 
 
     except Exception:

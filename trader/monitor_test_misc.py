@@ -585,10 +585,9 @@ class Ui_Form(Ui_MainWindow):
         #    "timeframe": timeframe},
         # ]
 
-        self.trades_history_tree.setColumnCount(6)
+        self.trades_history_tree.setColumnCount(5)
         self.trades_history_tree.setHeaderLabels(["pair_tf_tp",
                                                   "trading_begin_time",
-                                                  "is_active",
                                                   "orders_history_count",
                                                   "profit_BTC",
                                                   "profit_USD",
@@ -599,7 +598,6 @@ class Ui_Form(Ui_MainWindow):
             t = QtGui.QTreeWidgetItem([
                 trade["pair"] + "::" + trade["timeframe"] + "::" + str(trade["timeperiod"]),
                 trading_begin_time.strftime('%Y-%m-%d %H:%M'),
-                str(trade["is_active"]),
                 str(trade["orders_history_count"]),
                 trade["profit_BTC"],
                 trade["profit_USD"],
@@ -628,7 +626,7 @@ class Ui_Form(Ui_MainWindow):
     def trades_history_tree_delete(self):
         selected_items = self.trades_history_tree.selectedItems()
         for item in selected_items:
-            trade_id = int(item.text(6))
+            trade_id = int(item.text(5))
             trades_manage(action="delete", trade_id=trade_id)
         self.trades_history_tree_populate()
 
